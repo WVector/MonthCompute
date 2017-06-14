@@ -21,22 +21,22 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
 
 
-//      new Engine(28,8).compute(new Date().getTime(), new Engine.Callback() {
-//          @Override
-//          public void billTime() {
-//              System.out.println("ExampleUnitTest.billTime");
-//          }
-//
-//          @Override
-//          public void repaymentTime() {
-//              System.out.println("ExampleUnitTest.repaymentTime");
-//
-//          }
-//      });
+        new Engine(28, 1).compute(new Date().getTime(), new Engine.Callback() {
+            @Override
+            public void billTime() {
+                System.out.println("ExampleUnitTest.billTime");
+            }
 
-        long currentTime = new Date().getTime();
+            @Override
+            public void repaymentTime() {
+                System.out.println("ExampleUnitTest.repaymentTime");
 
-        System.out.println(sdf1.format(monthPlusDay(30, currentTime)));
+            }
+        });
+
+//        long currentTime = new Date().getTime();
+//
+//        System.out.println(sdf1.format(monthPlusDay(30, currentTime)));
 
 
         assertEquals(4, 2 + 2);

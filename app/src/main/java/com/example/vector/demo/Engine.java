@@ -27,21 +27,22 @@ public class Engine {
         if (callback == null) {
             return;
         }
+        long billTime = monthPlusDay(billDay, currentTime);
+        long repaymentTime = monthPlusDay(repaymentDay, currentTime);
 
+        long monthEnd = computeMonth(currentMonth(currentTime), 1);
+        long monthStart = currentMonth(currentTime);
+
+
+        System.out.println("账单日：" + sdf1.format(billTime));
+        System.out.println("还款日：" + sdf1.format(repaymentTime));
+        System.out.println("月初：" + sdf1.format(monthStart));
+        System.out.println("月末：" + sdf1.format(monthEnd));
 
         //隔月
         if (billDay >= repaymentDay) {
 
             //当前大于  上个月的还款日
-
-            long billTime = monthPlusDay(billDay, currentTime);
-            long repaymentTime = monthPlusDay(repaymentDay, currentTime);
-            long nextRepaymentTime = computeMonth(repaymentTime, 1);
-
-
-            System.out.println(sdf1.format(billTime));
-            System.out.println(sdf1.format(repaymentTime));
-            System.out.println(sdf1.format(nextRepaymentTime));
 
 
             if (currentTime >= repaymentTime && currentTime < billTime) {
@@ -51,19 +52,23 @@ public class Engine {
                 callback.billTime();
 
 
-            } else if (currentTime >= billTime && currentTime < nextRepaymentTime) {
-                //过了出账日  没有过 下一次的还款日  也就是还款期
+//            }
 
+//            else if (currentTime >= billTime && currentTime < monthEnd) {
+//                //过了出账日  没有过 下一次的还款日  也就是还款期
+//
+//                callback.repaymentTime();
+//
+            } else
+
+            {
                 callback.repaymentTime();
-
             }
 
 
         } else {
 
-            long billTime = monthPlusDay(billDay, currentTime);
-            long repaymentTime = monthPlusDay(repaymentDay, currentTime);
-            long nextBillTime = computeMonth(billTime, 1);
+
 
             //一个月内
 
@@ -74,12 +79,17 @@ public class Engine {
                 callback.repaymentTime();
 
 
-            } else if (currentTime >= repaymentTime && currentTime < nextBillTime) {
+            }
+//            else if (currentTime >= repaymentTime && currentTime < monthEnd) {
+//
+////过了还款日  没有过出账日  出账期
+//
+//                callback.billTime();
+//
+//            }
 
-//过了还款日  没有过出账日  出账期
-
+            else {
                 callback.billTime();
-
             }
 
 
